@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 12px 0 6px;
+        font-weight: 600;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: #43cea2;
+        box-shadow: 0 0 5px rgba(67, 206, 162, 0.6);
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #185a9d;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #144d84;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/user" method="POST">
+      <h1>Sign Up</h1>
+      <label>Full Name</label>
+      <input
+        type="text"
+        name="name"
+        placeholder="Enter your full name"
+        required
+      />
+      <label>Email</label>
+      <input type="email" name="email" placeholder="abc@gmail.com" required />
+      <label>Password</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+      />
+      <button type="submit">Sign Up</button>
+    </form>
+  </body>
+</html>

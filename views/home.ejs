@@ -80,8 +80,8 @@
 
       table {
         width: 100%;
-        border-collapse: separate; /* Changed from collapse */
-        border-spacing: 0 12px; /* Adds vertical spacing between rows */
+        border-collapse: separate;
+        border-spacing: 0 12px;
         background-color: #fff;
         border-radius: 10px;
         overflow: hidden;
@@ -96,13 +96,12 @@
       th {
         padding: 15px 20px;
         text-align: center;
-        border-bottom: none; /* remove bottom border for cleaner look */
+        border-bottom: none;
       }
 
       tbody tr {
         background-color: #f9f9f9;
         border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         transition: background-color 0.3s;
       }
 
@@ -119,11 +118,6 @@
         text-align: center;
       }
 
-      tbody tr td:first-child {
-        text-align: center;
-        padding-left: 25px; /* space from left border for S.No */
-      }
-
       a {
         color: #2980b9;
         text-decoration: none;
@@ -131,6 +125,18 @@
 
       a:hover {
         text-decoration: underline;
+      }
+
+      .toggle-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
       }
 
       @media (max-width: 600px) {
@@ -162,47 +168,63 @@
         <button type="submit">Generate</button>
       </form>
 
-      <% if (id) { %>
+      <% if (locals.id) { %>
       <p class="url-result">
         URL Generated:
-        <a href="<%= baseUrl %>/url/<%= id %>" target="_blank"
-          ><%= baseUrl %>/url/<%= id %></a
-        >
+        <a href="<%= baseUrl %>/url/<%= id %>" target="_blank">
+          <%= baseUrl %>/url/<%= id %>
+        </a>
       </p>
-      <% } %>
+      <% } %> <% if (locals.urls && urls.length > 0) { %>
+      <button class="toggle-btn" id="toggleTableBtn">Show Previous URLs</button>
 
-      <br />
-      <% if (locals.urls) { %>
-      <table>
-        <thead>
-          <tr>
-            <th>S.No</th>
-            <th>Short ID</th>
-            <th>Redirect URL</th>
-            <th>Clicks</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% urls.forEach((url, index) => { %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td><%= url.shortId %></td>
-            <td>
-              <a
-                href="<%= url.redirectURL %>"
-                target="_blank"
-                title="<%= url.redirectURL %>"
-              >
-                <%= url.redirectURL.length > 50 ? url.redirectURL.slice(0, 50) +
-                "..." : url.redirectURL %>
-              </a>
-            </td>
-            <td><%= url.visitHistory.length %></td>
-          </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <div id="urlTable" style="display: none">
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Short ID</th>
+              <th>Redirect URL</th>
+              <th>Clicks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortId %></td>
+              <td>
+                <a
+                  href="<%= url.redirectURL %>"
+                  target="_blank"
+                  title="<%= url.redirectURL %>"
+                >
+                  <%= url.redirectURL.length > 50 ? url.redirectURL.slice(0, 50)
+                  + "..." : url.redirectURL %>
+                </a>
+              </td>
+              <td><%= url.visitHistory.length %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
       <% } %>
     </div>
+
+    <script>
+      const toggleBtn = document.getElementById("toggleTableBtn");
+      const tableDiv = document.getElementById("urlTable");
+
+      if (toggleBtn && tableDiv) {
+        toggleBtn.addEventListener("click", () => {
+          const isHidden = tableDiv.style.display === "none";
+          tableDiv.style.display = isHidden ? "block" : "none";
+          toggleBtn.textContent = isHidden
+            ? "Hide Previous URLs"
+            : "Show Previous URLs";
+        });
+      }
+    </script>
   </body>
 </html>
