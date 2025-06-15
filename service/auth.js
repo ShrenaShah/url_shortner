@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 function setUser(user) {
   return jwt.sign(
     {
-      id: user._id,
+      id: user.id,
       email: user.email,
       role: user.role || "NORMAL",
     },
