@@ -29,7 +29,8 @@ router.get("/signup", async (req, res) => {
   return res.render("signup");
 });
 
-router.get("/login", async (req, res) => {
-  return res.render("login");
+router.get("/signup", async (req, res) => {
+  return res.render("signup", { error: null });
 });
+
 module.exports = router;
