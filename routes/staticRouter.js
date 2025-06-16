@@ -26,11 +26,10 @@ router.get("/", restrictTo(["NORMAL", "ADMIN"]), async (req, res) => {
 });
 
 router.get("/signup", async (req, res) => {
-  return res.render("signup");
-});
-
-router.get("/signup", async (req, res) => {
   return res.render("signup", { error: null });
 });
 
+router.get("/login", async (req, res) => {
+  return res.render("login");
+});
 module.exports = router;
