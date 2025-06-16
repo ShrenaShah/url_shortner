@@ -97,7 +97,7 @@
       />
       <button type="submit">Sign Up</button>
     </form>
-    <% if (error) { %>
+    <% if (typeof error !== "undefined" && error) { %>
     <p style="color: red"><%= error %></p>
     <% } %>
   </body>
